@@ -47,7 +47,7 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
         for i in range(len(pres_temp)):
             pres_temp_selected = pres_temp[i]
             for j in range(n_intervals - 1):
-                if pres_temp_selected < (tensor_data[j, 4] + dim_interval) and pres_temp_selected > tensor_data[j, 4]:
+                if (tensor_data[j, 4] + dim_interval) > pres_temp_selected > tensor_data[j, 4]:
                     tensor_data[j, 5] = float(temp[i])
 
         tensor_data = tensor_data[tensor_data[:, 5] > 0]
@@ -60,7 +60,7 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
         for i in range(len(pres_psal)):
             pres_psal_selected = pres_psal[i]
             for j in range(new_dimension_rows):
-                if pres_psal_selected < (tensor_data[j, 4] + dim_interval) and pres_psal_selected > tensor_data[j, 4]:
+                if (tensor_data[j, 4] + dim_interval) > pres_psal_selected > tensor_data[j, 4]:
                     tensor_data[j, 6] = float(psal[i])
 
         tensor_data = tensor_data[tensor_data[:, 6] > 0]
@@ -73,7 +73,7 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
         for i in range(len(pres_chla)):
             pres_chla_selected = pres_chla[i]
             for j in range(new_dimension_rows):
-                if pres_chla_selected < (tensor_data[j, 4] + dim_interval) and pres_chla_selected > tensor_data[j, 4]:
+                if (tensor_data[j, 4] + dim_interval) > pres_chla_selected > tensor_data[j, 4]:
                     tensor_data[j, 7] = float(chla[i])
         tensor_data = tensor_data[tensor_data[:, 7] > 0]
         new_dimension_rows = tensor_data.shape[0]
@@ -85,7 +85,7 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
         for i in range(len(pres_doxy)):
             pres_doxy_selected = pres_doxy[i]
             for j in range(new_dimension_rows):
-                if pres_doxy_selected < (tensor_data[j, 4] + dim_interval) and pres_doxy_selected > tensor_data[j, 4]:
+                if (tensor_data[j, 4] + dim_interval) > pres_doxy_selected > tensor_data[j, 4]:
                     tensor_data[j, 8] = float(doxy[i])
 
         tensor_data = tensor_data[tensor_data[:, 8] > 0]
@@ -98,7 +98,7 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
         for i in range(len(pres_nitrate)):
             pres_nitrate_selected = pres_nitrate[i]
             for j in range(new_dimension_rows):
-                if pres_nitrate_selected < (tensor_data[j, 4] + dim_interval) and pres_nitrate_selected > tensor_data[
+                if (tensor_data[j, 4] + dim_interval) > pres_nitrate_selected > tensor_data[
                     j, 4]:
                     tensor_data[j, 9] = float(nitrate[i])
 
