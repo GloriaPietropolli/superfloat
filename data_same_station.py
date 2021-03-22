@@ -15,7 +15,6 @@ vars = []
 for var in ds.variables:
     vars.append(var)
 
-
 dimension_matrix_single_emersion = 1000
 input_dimension = 10
 size_matrix_info = [dimension_matrix_single_emersion, input_dimension]
@@ -29,24 +28,44 @@ dim_interval = (max_pres - min_pres) / n_intervals
 data_single_emersion(path, size_matrix_info, pressure_info)
 
 
-def group_data_same_station():
-    file_first_station = []
-    first_station = list_nc_data[0][0:7]
-    for file in list_nc_data:
-        if file[0:7] == first_station:
-            file_first_station.append(file)
-    return file_first_station
+def float_number():  # out1: list of all the float number; out2= list of all measurements per float number
+    float_number = []
+    measurement_per_float = []
+    while list_nc_data:
+        considered_station = list_nc_data[0][0:7]
+        list_measurement_considered_float = []
+        for file in list_nc_data:
+            if file[0:7] == considered_station:
+                list_measurement_considered_float.append(file)
+                list_nc_data.remove(file)
+        float_number.append(considered_station)
+        measurement_per_float.append(list_measurement_considered_float)
+
+    return float_number, measurement_per_float
 
 
-def data_single_station():
-    file_first_station = group_data_same_station()
-    tensor_data = data_single_emersion('data/' + file_first_station[0], size_matrix_info, pressure_info)
-    file_first_station.remove(file_first_station[0])
-    for file_selected in file_first_station:
+float_number, measurement_per_float = float_number()
+
+
+def data_single_station(station_considered):  # station considered is indexing with the number of the position in the
+    # float_number list
+    file_station = measurement_per_float[station_considered]
+    tensor_data = data_single_emersion('data/' + file_station[0], size_matrix_info, pressure_info)
+    file_station.remove(file_station[0])
+    for file_selected in file_station:
         data_to_add = data_single_emersion('data/' + file_selected, size_matrix_info, pressure_info)
         if data_to_add is not None:
             tensor_data = torch.cat((tensor_data, data_to_add), 0)
     return tensor_data
 
 
-data_single_float = data_single_station()
+list_tensor_data = []
+
+
+def data_all_station():
+    for index_station in range(len(float_number)):
+        station_considered = float_number[index_station]
+        tensor_considered = data_single_station(index_station)
+        list_tensor_data.append(tensor_considered)
+        np.savetxt('data_elabored/data_station_' + str(station_considered) + '.csv', tensor_considered, delimiter=',')
+

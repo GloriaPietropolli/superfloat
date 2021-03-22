@@ -24,7 +24,7 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
 
     tensor_data = torch.zeros(dimension_matrix_single_emersion, input_dimension)
 
-    number_float = torch.tensor(np.float(file[5:12]))
+    number_float = torch.tensor(np.float(np.int(file[15:22] + file[23:26])))
     tensor_data[:, 0] = number_float
 
     latitude = torch.tensor(ds['LATITUDE'][:].data)
@@ -98,11 +98,9 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
         for i in range(len(pres_nitrate)):
             pres_nitrate_selected = pres_nitrate[i]
             for j in range(new_dimension_rows):
-                if (tensor_data[j, 4] + dim_interval) > pres_nitrate_selected > tensor_data[
-                    j, 4]:
+                if (tensor_data[j, 4] + dim_interval) > pres_nitrate_selected > tensor_data[j, 4]:
                     tensor_data[j, 9] = float(nitrate[i])
 
         tensor_data = tensor_data[tensor_data[:, 9] > 0]
-        new_dimension_rows = tensor_data.shape[0]
 
     return tensor_data
