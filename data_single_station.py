@@ -24,7 +24,7 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
 
     tensor_data = torch.zeros(dimension_matrix_single_emersion, input_dimension)
 
-    number_float = torch.tensor(np.float(np.int(file[15:22] + file[23:26])))
+    number_float = torch.tensor(np.int(file[15:22] + file[23:26]))
     tensor_data[:, 0] = number_float
 
     latitude = torch.tensor(ds['LATITUDE'][:].data)

@@ -68,4 +68,5 @@ def data_all_station():
         tensor_considered = data_single_station(index_station)
         list_tensor_data.append(tensor_considered)
         np.savetxt('data_elabored/data_station_' + str(station_considered) + '.csv', tensor_considered, delimiter=',')
+        print('New tensor saved!')
 
