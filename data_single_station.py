@@ -24,21 +24,24 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
 
     tensor_data = torch.zeros(dimension_matrix_single_emersion, input_dimension)
 
-    number_float = torch.tensor(np.int(file[15:22] + file[23:26]))
+    number_float = torch.tensor(np.int(file[15:22]))
     tensor_data[:, 0] = number_float
 
+    number_measurament = torch.tensor(np.int(file[23:26]))
+    tensor_data[:, 1] = number_measurament
+
     latitude = torch.tensor(ds['LATITUDE'][:].data)
-    tensor_data[:, 1] = latitude
+    tensor_data[:, 2] = latitude
 
     longitude = torch.tensor(ds['LONGITUDE'][:].data)
-    tensor_data[:, 2] = longitude
+    tensor_data[:, 3] = longitude
 
     date_time = ds['REFERENCE_DATE_TIME'][:].data
     date_time_adjusted = read_date_time(date_time)
-    tensor_data[:, 3] = date_time_adjusted
+    tensor_data[:, 4] = date_time_adjusted
 
     for i in range(n_intervals):
-        tensor_data[i, 4] = (max_pres - min_pres) / n_intervals * (i + 1)
+        tensor_data[i, 5] = (max_pres - min_pres) / n_intervals * (i + 1)
 
     if 'TEMP' in variab:
         temp = ds['TEMP'][:].data
@@ -47,10 +50,10 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
         for i in range(len(pres_temp)):
             pres_temp_selected = pres_temp[i]
             for j in range(n_intervals - 1):
-                if (tensor_data[j, 4] + dim_interval) > pres_temp_selected > tensor_data[j, 4]:
-                    tensor_data[j, 5] = float(temp[i])
+                if (tensor_data[j, 5] + dim_interval) > pres_temp_selected > tensor_data[j, 5]:
+                    tensor_data[j, 6] = float(temp[i])
 
-        tensor_data = tensor_data[tensor_data[:, 5] > 0]
+        tensor_data = tensor_data[tensor_data[:, 6] > 0]
         new_dimension_rows = tensor_data.shape[0]
 
     if 'PSAL' in variab:
@@ -60,10 +63,10 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
         for i in range(len(pres_psal)):
             pres_psal_selected = pres_psal[i]
             for j in range(new_dimension_rows):
-                if (tensor_data[j, 4] + dim_interval) > pres_psal_selected > tensor_data[j, 4]:
-                    tensor_data[j, 6] = float(psal[i])
+                if (tensor_data[j, 5] + dim_interval) > pres_psal_selected > tensor_data[j, 5]:
+                    tensor_data[j, 7] = float(psal[i])
 
-        tensor_data = tensor_data[tensor_data[:, 6] > 0]
+        tensor_data = tensor_data[tensor_data[:, 7] > 0]
         new_dimension_rows = tensor_data.shape[0]
 
     if 'CHLA' in variab:
@@ -73,9 +76,9 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
         for i in range(len(pres_chla)):
             pres_chla_selected = pres_chla[i]
             for j in range(new_dimension_rows):
-                if (tensor_data[j, 4] + dim_interval) > pres_chla_selected > tensor_data[j, 4]:
-                    tensor_data[j, 7] = float(chla[i])
-        tensor_data = tensor_data[tensor_data[:, 7] > 0]
+                if (tensor_data[j, 5] + dim_interval) > pres_chla_selected > tensor_data[j, 5]:
+                    tensor_data[j, 8] = float(chla[i])
+        tensor_data = tensor_data[tensor_data[:, 8] > 0]
         new_dimension_rows = tensor_data.shape[0]
 
     if 'DOXY' in variab:
@@ -85,10 +88,10 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
         for i in range(len(pres_doxy)):
             pres_doxy_selected = pres_doxy[i]
             for j in range(new_dimension_rows):
-                if (tensor_data[j, 4] + dim_interval) > pres_doxy_selected > tensor_data[j, 4]:
-                    tensor_data[j, 8] = float(doxy[i])
+                if (tensor_data[j, 5] + dim_interval) > pres_doxy_selected > tensor_data[j, 5]:
+                    tensor_data[j, 9] = float(doxy[i])
 
-        tensor_data = tensor_data[tensor_data[:, 8] > 0]
+        tensor_data = tensor_data[tensor_data[:, 9] > 0]
         new_dimension_rows = tensor_data.shape[0]
 
     if 'NITRATE' in variab:
@@ -98,9 +101,9 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
         for i in range(len(pres_nitrate)):
             pres_nitrate_selected = pres_nitrate[i]
             for j in range(new_dimension_rows):
-                if (tensor_data[j, 4] + dim_interval) > pres_nitrate_selected > tensor_data[j, 4]:
-                    tensor_data[j, 9] = float(nitrate[i])
+                if (tensor_data[j, 5] + dim_interval) > pres_nitrate_selected > tensor_data[j, 5]:
+                    tensor_data[j, 10] = float(nitrate[i])
 
-        tensor_data = tensor_data[tensor_data[:, 9] > 0]
+        tensor_data = tensor_data[tensor_data[:, 10] > 0]
 
     return tensor_data
