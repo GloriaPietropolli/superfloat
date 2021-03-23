@@ -53,7 +53,7 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
                 if (tensor_data[j, 5] + dim_interval) > pres_temp_selected > tensor_data[j, 5]:
                     tensor_data[j, 6] = float(temp[i])
 
-        tensor_data = tensor_data[tensor_data[:, 6] > 0]
+        # tensor_data = tensor_data[tensor_data[:, 6] > 0]
         new_dimension_rows = tensor_data.shape[0]
 
     if 'PSAL' in variab:
@@ -66,7 +66,7 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
                 if (tensor_data[j, 5] + dim_interval) > pres_psal_selected > tensor_data[j, 5]:
                     tensor_data[j, 7] = float(psal[i])
 
-        tensor_data = tensor_data[tensor_data[:, 7] > 0]
+        # tensor_data = tensor_data[tensor_data[:, 7] > 0]
         new_dimension_rows = tensor_data.shape[0]
 
     if 'CHLA' in variab:
@@ -78,7 +78,7 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
             for j in range(new_dimension_rows):
                 if (tensor_data[j, 5] + dim_interval) > pres_chla_selected > tensor_data[j, 5]:
                     tensor_data[j, 8] = float(chla[i])
-        tensor_data = tensor_data[tensor_data[:, 8] > 0]
+        # tensor_data = tensor_data[tensor_data[:, 8] > 0]
         new_dimension_rows = tensor_data.shape[0]
 
     if 'DOXY' in variab:
@@ -91,7 +91,7 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
                 if (tensor_data[j, 5] + dim_interval) > pres_doxy_selected > tensor_data[j, 5]:
                     tensor_data[j, 9] = float(doxy[i])
 
-        tensor_data = tensor_data[tensor_data[:, 9] > 0]
+        # tensor_data = tensor_data[tensor_data[:, 9] > 0]
         new_dimension_rows = tensor_data.shape[0]
 
     if 'NITRATE' in variab:
@@ -104,6 +104,6 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
                 if (tensor_data[j, 5] + dim_interval) > pres_nitrate_selected > tensor_data[j, 5]:
                     tensor_data[j, 10] = float(nitrate[i])
 
-        tensor_data = tensor_data[tensor_data[:, 10] > 0]
+        # tensor_data = tensor_data[tensor_data[:, 10] > 0]
 
     return tensor_data
