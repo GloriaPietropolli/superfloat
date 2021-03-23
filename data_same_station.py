@@ -77,6 +77,11 @@ def data_all_station():
     for index_station in range(len(list_float_number)):
         station_considered = list_float_number[index_station]
         tensor_considered = data_single_station(index_station)
+
         list_tensor_data.append(tensor_considered)
+
+        for i in range(tensor_considered.shape[1]):
+            tensor_considered[0, i] = i
+
         np.savetxt('data_elabored/data_station_' + str(station_considered) + '.csv', tensor_considered, delimiter=',')
-        print('New tensor saved!')
+        print('New tensor saved : ' + str(station_considered) )

@@ -106,4 +106,6 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
 
         # tensor_data = tensor_data[tensor_data[:, 10] > 0]
 
+    tensor_data = tensor_data[tensor_data[:, 5] > 0]  # delete rows with empty pressure
+
     return tensor_data
