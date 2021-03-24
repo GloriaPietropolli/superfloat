@@ -16,7 +16,7 @@ for var in ds.variables:
     vars.append(var)
 
 dimension_matrix_single_emersion = 1000
-input_dimension = 11
+input_dimension = 13
 size_matrix_info = [dimension_matrix_single_emersion, input_dimension]
 
 min_pres = 0
@@ -84,4 +84,4 @@ def data_all_station():
             tensor_considered[0, i] = i
 
         np.savetxt('data_elabored/data_station_' + str(station_considered) + '.csv', tensor_considered, delimiter=',')
-        print('New tensor saved : ' + str(station_considered) )
+        print('New tensor saved : ' + str(station_considered))

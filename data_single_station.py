@@ -53,7 +53,7 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
                 if (tensor_data[j, 5] + dim_interval) > pres_temp_selected > tensor_data[j, 5]:
                     tensor_data[j, 6] = float(temp[i])
 
-        # tensor_data = tensor_data[tensor_data[:, 6] > 0]
+        tensor_data = tensor_data[tensor_data[:, 6] > 0]
         new_dimension_rows = tensor_data.shape[0]
 
     if 'PSAL' in variab:
@@ -66,7 +66,7 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
                 if (tensor_data[j, 5] + dim_interval) > pres_psal_selected > tensor_data[j, 5]:
                     tensor_data[j, 7] = float(psal[i])
 
-        # tensor_data = tensor_data[tensor_data[:, 7] > 0]
+        tensor_data = tensor_data[tensor_data[:, 7] > 0]
         new_dimension_rows = tensor_data.shape[0]
 
     if 'CHLA' in variab:
@@ -91,7 +91,7 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
                 if (tensor_data[j, 5] + dim_interval) > pres_doxy_selected > tensor_data[j, 5]:
                     tensor_data[j, 9] = float(doxy[i])
 
-        # tensor_data = tensor_data[tensor_data[:, 9] > 0]
+        tensor_data = tensor_data[tensor_data[:, 9] > 0]
         new_dimension_rows = tensor_data.shape[0]
 
     if 'NITRATE' in variab:
@@ -105,6 +105,31 @@ def data_single_emersion(file, size_matrix_info, pressure_info):
                     tensor_data[j, 10] = float(nitrate[i])
 
         # tensor_data = tensor_data[tensor_data[:, 10] > 0]
+
+    if 'BBP700' in variab:
+        nitrate = ds['BBP700'][:].data
+        pres_nitrate = ds['PRES_BBP700'][:].data
+
+        for i in range(len(pres_nitrate)):
+            pres_nitrate_selected = pres_nitrate[i]
+            for j in range(new_dimension_rows):
+                if (tensor_data[j, 5] + dim_interval) > pres_nitrate_selected > tensor_data[j, 5]:
+                    tensor_data[j, 11] = float(nitrate[i])
+
+        # tensor_data = tensor_data[tensor_data[:, 11] > 0]
+        # new_dimension_rows = tensor_data.shape[0]
+
+    if 'DOWNWELLING_PAR' in variab:
+        nitrate = ds['DOWNWELLING_PAR'][:].data
+        pres_nitrate = ds['PRES_DOWNWELLING_PAR'][:].data
+
+        for i in range(len(pres_nitrate)):
+            pres_nitrate_selected = pres_nitrate[i]
+            for j in range(new_dimension_rows):
+                if (tensor_data[j, 5] + dim_interval) > pres_nitrate_selected > tensor_data[j, 5]:
+                    tensor_data[j, 12] = float(nitrate[i])
+
+        # tensor_data = tensor_data[tensor_data[:, 12] > 0]
 
     tensor_data = tensor_data[tensor_data[:, 5] > 0]  # delete rows with empty pressure
 
