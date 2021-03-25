@@ -4,6 +4,7 @@ Python file containing all the functions necessary to preprocessing the data in 
 
 import torch
 import numpy as np
+from torch.utils.data import Dataset, DataLoader
 
 
 def fix_datetime(dataset):  # computation of the decimal year
@@ -54,3 +55,24 @@ def preparation_routine(dataset, training):
     dataset = fix_pressure(dataset)
     dataset = normalization(dataset, training)
     return dataset
+
+
+def split_data_target(dataset, index_target):  # the input is the index of the element we want to use as target
+    dataset_input = torch.cat((dataset[:, 2:9], dataset[:, 10]), 1)
+    dataset_output = dataset[:, index_target]
+    return dataset_input, dataset_output
+
+
+# introduction of the class necessary for the mini-batching
+
+class PrepareData(Dataset):
+
+    def __init__(self, X, y):
+        self.X = X
+        self.y = y
+
+    def __len__(self):
+        return len(self.X)
+
+    def __getitem__(self, idx):
+        return self.X[idx], self.y[idx]

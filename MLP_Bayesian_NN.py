@@ -25,7 +25,7 @@ activation_function = MySigmoid()
 
 
 class MLP_Bayesian(nn.Module):
-    def __init__(self, top):
+    def __init__(self):
         input_siz, n_hidden1, n_hidden2, output_size = topology
         super(MLP_Bayesian, self).__init__()
         self.input_siz = input_siz

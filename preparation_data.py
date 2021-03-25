@@ -5,7 +5,7 @@ Python file containing the routine to preprocessing the data in order to feed co
 import pandas as pd
 import torch
 from aggregation_data import list_float_total
-from preparation_function import preparation_routine
+from preparation_function import preparation_routine, split_data_target
 
 
 path = 'data_elabored/'
@@ -43,6 +43,9 @@ training_set, validation_set = training_set.float(), validation_set.float()
 
 training_set, validation_set = preparation_routine(training_set, training_set), preparation_routine(validation_set,
                                                                                                     training_set)
+
+training_input, training_target = split_data_target(training_set)
+validation_input, validation_target = split_data_target(validation_set)
 
 
 
