@@ -1,7 +1,7 @@
 import pandas as pd
 import torch
 from aggregation_data import list_float_total
-from preparation_function import *
+from preparation_function import preparation_routine
 
 
 path = 'data_elabored/'
@@ -28,12 +28,17 @@ dataset = aggregation_all_float_info()
 dataset = dataset[torch.randperm(dataset.size()[0])]  # shuffle of the samples
 dataset_size = len(dataset[:, 0])
 
-percentage_samples_for_training = 80
+percentage_samples_for_training = 80  # 80% of samples are used for training
 training_set_size = int(dataset_size * percentage_samples_for_training/100)
 validation_set_size = dataset_size - training_set_size
 
 training_set, validation_set = torch.utils.data.random_split(dataset, [training_set_size, validation_set_size])
 training_set, validation_set = training_set.float(), validation_set.float()
+
+training_set, validation_set = preparation_routine(training_set, training_set), preparation_routine(validation_set,
+                                                                                                    training_set)
+
+
 
 
 
