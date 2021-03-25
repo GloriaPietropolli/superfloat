@@ -1,3 +1,7 @@
+"""
+Python file containing the routine to preprocessing the data in order to feed correctly the nn
+"""
+
 import pandas as pd
 import torch
 from aggregation_data import list_float_total
@@ -27,6 +31,8 @@ def aggregation_all_float_info():
 dataset = aggregation_all_float_info()
 dataset = dataset[torch.randperm(dataset.size()[0])]  # shuffle of the samples
 dataset_size = len(dataset[:, 0])
+
+input_size = len(dataset[0, :])
 
 percentage_samples_for_training = 80  # 80% of samples are used for training
 training_set_size = int(dataset_size * percentage_samples_for_training/100)

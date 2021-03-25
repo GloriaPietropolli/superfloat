@@ -1,3 +1,7 @@
+"""
+Python file containing all the functions necessary to preprocessing the data in order to feed correctly the nn
+"""
+
 import torch
 import numpy as np
 
