@@ -17,8 +17,8 @@ losses = mylosses()
 
 model_mlp = MLP_Bayesian()
 optimizer = torch.optim.Adam(model_mlp.parameters(), lr=lr)  # momentum=0.5)
-train_mb(model_mlp, epochs, training_input, training_target, optimizer, ds)
-# train(model_mlp, epochs, training_input, training_target, optimizer)
+# train_mb(model_mlp, epochs, training_input, training_target, optimizer, ds)
+train(model_mlp, epochs, training_input, training_target, optimizer)
 
 result = model_mlp(training_input)  # result = model_selected(data)
 
