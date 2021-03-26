@@ -50,4 +50,4 @@ training_target, validation_target = dataset_output[0:training_set_size], datase
 training_target, validation_target = training_target.float(), validation_target.float()
 
 training_target = normalization_target(training_target, training_target)
-validation_target = validation_target(validation_target, training_target)
+validation_target = normalization_target(validation_target, training_target)
