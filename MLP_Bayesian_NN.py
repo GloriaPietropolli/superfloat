@@ -26,11 +26,11 @@ activation_function = MySigmoid()
 
 class MLP_Bayesian(nn.Module):
     def __init__(self):
-        input_siz, n_hidden1, n_hidden2, output_size = topology
+        input_size, n_hidden1, n_hidden2, output_size = topology
         super(MLP_Bayesian, self).__init__()
-        self.input_siz = input_siz
+        self.input_size = input_size
         self.network = nn.Sequential(
-            nn.Linear(input_siz, n_hidden1),  # BayesianLinear(input_size, n_hidden1),  #
+            nn.Linear(input_size, n_hidden1),  # BayesianLinear(input_size, n_hidden1),  #
             activation_function,  # nn.SELU(),  #  funzione bene con nn.ReLU(), ELU(),
             nn.Linear(n_hidden1, n_hidden2),  # BayesianLinear(n_hidden1, n_hidden2),  #
             activation_function,  # nn.SELU(), #
@@ -38,5 +38,5 @@ class MLP_Bayesian(nn.Module):
         )
 
     def forward(self, x):
-        x = x.view(-1, self.input_siz)
+        x = x.view(-1, self.input_size)
         return self.network(x)

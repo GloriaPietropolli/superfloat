@@ -12,7 +12,7 @@ def fix_datetime(dataset):  # computation of the decimal year
         date_time = str(dataset[i, 4].item())
         year, month, day = date_time[0:4], date_time[4:6], date_time[6:8]
         hour, min = date_time[8:10], date_time[10:12]
-        dataset[i, 0] = int(year) + float(month / 10)  # fix data input into decimal year
+        dataset[i, 0] = int(year) + float(int(month) / 10)  # fix data input into decimal year
     return dataset
 
 
@@ -26,6 +26,7 @@ def fix_longitude(dataset):
     second_half = dataset[:, 4:]
     dataset[:, 3] = np.abs(1 - np.mod(dataset[:, 2] - 110, 360) / 180)  # fix longitude input
     new_column = np.abs(1 - np.mod(dataset[:, 3] - 20, 360) / 180)  # fix longitude input
+    new_column.resize_(first_half.shape[0], 1)
     dataset = torch.cat((first_half, new_column, second_half), 1)
     return dataset
 
@@ -48,17 +49,23 @@ def normalization(dataset, training):  # we want to normalize the dataset using 
     return dataset
 
 
-def preparation_routine(dataset, training):
+def normalization_target(target, training_target):
+    mean, std = training_target.mean(), training_target.std()
+    target = 2 / 3 * (target - mean) / std
+    return target
+
+
+def preparation_routine(dataset):
     dataset = fix_datetime(dataset)
     dataset = fix_latitude(dataset)
     dataset = fix_longitude(dataset)
     dataset = fix_pressure(dataset)
-    dataset = normalization(dataset, training)
     return dataset
 
 
 def split_data_target(dataset, index_target):  # the input is the index of the element we want to use as target
-    dataset_input = torch.cat((dataset[:, 2:9], dataset[:, 10]), 1)
+    dataset = dataset[dataset[:, index_target] > 0]  # delete blank rows relative to missed value of the target
+    dataset_input = torch.cat((dataset[:, 2:9], dataset[:, 10].resize(dataset.shape[0], 1)), 1)
     dataset_output = dataset[:, index_target]
     return dataset_input, dataset_output
 
