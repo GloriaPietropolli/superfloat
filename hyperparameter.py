@@ -2,10 +2,13 @@
 Script containing the hyperparameter that can be tuned in order to facilitate the learning
 """
 
-epochs = 1500
-lr = 0.001
-batch_size = 64
-index_target = 11  # index of the element we want to estimate
+epochs = 500
+lr = 0.005
+batch_size = 1000
+index_target = 9  # index of the element we want to estimate
+target_dict = {9: 'chla', 11: 'nitrate', 12: 'bb', 13: 'dp'}
+path_target = 'fig/fig_' + target_dict[index_target] + '/'
+mb_flag = 1  # 1 means we are using mini-batches, 0 means we are not
 
 list_float_total = ['6902875', '6901765', '6901772', '6901775', '6901770', '6902874', '6902965', '6903247', '6901649',
                     '6900807', '6902899', '6901862', '6902873', '6901466', '7900592', '6901476', '6901032', '6902733',

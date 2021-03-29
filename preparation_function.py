@@ -4,7 +4,7 @@ Python file containing all the functions necessary to preprocessing the data in 
 
 import torch
 import numpy as np
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 
 
 def fix_datetime(dataset):  # computation of the decimal year

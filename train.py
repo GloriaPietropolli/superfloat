@@ -5,11 +5,14 @@ both the routine with mini-batches and without mini-batches
 
 import torch
 from IPython import display
-from hyperparameter import lr, batch_size
+from hyperparameter import *
 
 losses = []
 
-path = "fig/"
+if mb_flag == 1:
+    path = path_target + "mb/"
+if mb_flag == 0:
+    path = path_target + "no_mb/"
 
 
 def train(model, epoch, data, target, optimizer):
