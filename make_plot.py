@@ -20,7 +20,7 @@ def comparison_plot(target, result_validation, mae, rmse):
     plt.text(0.5, -1.5, f"[MAE]: {mae},\n[RMSE]: {rmse}", style='italic',
              bbox={'facecolor': 'red', 'alpha': 0.5, 'pad': 10})
 
-    plt.scatter(target.detach().numpy(), result_validation.detach().numpy(), s=5, color=colors, label='data')
+    plt.scatter(target.detach().numpy(), result_validation.detach().numpy(), s=1, color=colors, label='data')
     x_min, x_max, y_min, y_max = -2, 3, -2, 3
     plt.xlim([x_min, x_max])
     plt.ylim([y_min, y_max])

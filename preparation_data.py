@@ -43,11 +43,12 @@ validation_set_size = dataset_size - training_set_size
 training_input, validation_input = dataset_input[0:training_set_size, :], dataset_input[training_set_size:, :]
 training_input, validation_input = training_input.float(), validation_input.float()
 
-training_input = normalization(training_input, training_input)
 validation_input = normalization(validation_input, training_input)
+training_input = normalization(training_input, training_input)
 
 training_target, validation_target = dataset_output[0:training_set_size], dataset_output[training_set_size:]
 training_target, validation_target = training_target.float(), validation_target.float()
 
-training_target = normalization_target(training_target, training_target)
 validation_target = normalization_target(validation_target, training_target)
+training_target = normalization_target(training_target, training_target)
+

@@ -22,9 +22,10 @@ train(model_mlp, epochs, training_input, training_target, optimizer)
 
 result = model_mlp(training_input)  # result = model_selected(data)
 
-result_validation = model_mlp(validation_input)
+validation_result = model_mlp(validation_input)
 
-get_all_plot(training_target, result, losses)
+# get_all_plot(training_target, result, losses)
+get_all_plot(validation_target, validation_result, losses)
 
 # mae, rmse = validation_MAE_RMSE(len_validation, target_validation, result_validation)
 
