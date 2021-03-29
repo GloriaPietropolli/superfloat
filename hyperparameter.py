@@ -2,10 +2,10 @@
 Script containing the hyperparameter that can be tuned in order to facilitate the learning
 """
 
-epochs = 1000
-lr = 0.0001
+epochs = 1500
+lr = 0.001
 batch_size = 64
-index_target = 1  # index of the element we want to extimate
+index_target = 11  # index of the element we want to extimate
 
 list_float_total = ['6902875', '6901765', '6901772', '6901775', '6901770', '6902874', '6902965', '6903247', '6901649',
                     '6900807', '6902899', '6901862', '6902873', '6901466', '7900592', '6901476', '6901032', '6902733',

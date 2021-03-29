@@ -33,8 +33,8 @@ dataset = dataset[torch.randperm(dataset.size()[0])]  # shuffle of the samples
 dataset = preparation_routine(dataset)
 
 dataset_input, dataset_output = split_data_target(dataset, index_target)
-dataset_size = len(dataset_input[:, 0])
-input_size = len(dataset_input[0, :])
+dataset_size = len(dataset_input[:, 0])  # number of samples of the nn
+input_size = len(dataset_input[0, :])  # number of input of the nn
 
 percentage_samples_for_training = 80  # 80% of samples are used for training
 training_set_size = int(dataset_size * percentage_samples_for_training / 100)

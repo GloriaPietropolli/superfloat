@@ -28,7 +28,7 @@ def comparison_plot(target, result_validation, mae, rmse):
     plt.plot(variable, variable, label='Our Fitting Line')
     plt.xlabel('true target')
     plt.ylabel('approximated target')
-    plt.title('Comparison between the true result_validation and the approximated one')
+    plt.title('Comparison between the true result and the approximated one')
     plt.legend()
 
     plt.savefig(path + 'validation' + "_ep" + str(epochs) + "_samples" + "_lr" + str(lr) + "_bs" + str(batch_size) +

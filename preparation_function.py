@@ -24,8 +24,8 @@ def fix_latitude(dataset):  # divide latitude input for 90
 def fix_longitude(dataset):
     first_half = dataset[:, 0:4]
     second_half = dataset[:, 4:]
-    dataset[:, 3] = np.abs(1 - np.mod(dataset[:, 2] - 110, 360) / 180)  # fix longitude input
     new_column = np.abs(1 - np.mod(dataset[:, 3] - 20, 360) / 180)  # fix longitude input
+    dataset[:, 3] = np.abs(1 - np.mod(dataset[:, 3] - 110, 360) / 180)  # fix longitude input
     new_column.resize_(first_half.shape[0], 1)
     dataset = torch.cat((first_half, new_column, second_half), 1)
     return dataset

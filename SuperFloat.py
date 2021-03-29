@@ -24,17 +24,8 @@ result = model_mlp(training_input)  # result = model_selected(data)
 
 result_validation = model_mlp(validation_input)
 
-get_all_plot(validation_target, result_validation, losses)
-
-
+get_all_plot(training_target, result, losses)
 
 # mae, rmse = validation_MAE_RMSE(len_validation, target_validation, result_validation)
 
 # print('MAE : ', mae, '\n RMSE : ', rmse)
-
-
-
-
-
-
-
